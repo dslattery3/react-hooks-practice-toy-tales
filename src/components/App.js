@@ -7,7 +7,6 @@ import ToyContainer from "./ToyContainer";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [toys, setToys] = useState([]);
-  const [isDelete, setIsDelete] = useState(false)
 
   useEffect(() => {
     fetch("http://localhost:3001/toys")
@@ -18,12 +17,7 @@ function App() {
   function handleClick() {
     setShowForm((showForm) => !showForm);
   }
-  function handleDelete(toyId){
-    const newToys = [...toys]
-    const index = newToys.findIndex(toy => toy.id === toyId) 
-    newToys.splice(index, 1)
-    setToys(newToys)
-  }
+
   function onAddToy(newToy) {
     setToys([...toys, newToy])
   }
@@ -31,11 +25,11 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm addToy={onAddToy}  /> : null}
+      {showForm ? <ToyForm addToy={onAddToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer handleDelete={handleDelete} setToys={setToys} toys={toys}/>
+      <ToyContainer toys={toys}/>
     </>
   );
 }
