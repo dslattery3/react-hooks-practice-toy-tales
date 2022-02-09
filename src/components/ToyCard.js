@@ -1,9 +1,9 @@
 import React from "react";
 
-function ToyCard({ id, name, image, likes }) {
+function ToyCard({ id, name, image, likes, deleteToy }) {
 
   function handleDelete() {
-    console.log(id)
+    deleteToy(id)
     fetch(`http://localhost:3001/toys/${id}`, {
       method: "DELETE",
     })
@@ -11,7 +11,7 @@ function ToyCard({ id, name, image, likes }) {
       .then((toy) => {
         console.log(toy);
       });
-  }
+  } 
 
   return (
     <div className="card">
